@@ -1,17 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PolyFilm</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+  body {
+    font-family: Arial;
+    background: #0f172a;
+    color: white;
+    text-align: center;
+    padding: 30px;
+  }
+  .scene {
+    background:#020617;
+    padding:20px;
+    border-radius:12px;
+    margin-top:20px;
+    text-align:left;
+  }
+  span.word {
+    color:#22c55e;
+    cursor:pointer;
+    font-weight:bold;
+  }
+  button {
+    margin-top:20px;
+    padding:10px 20px;
+    font-size:18px;
+    border-radius:10px;
+    border:none;
+    background:#22c55e;
+    color:black;
+    cursor:pointer;
+  }
+</style>
+</head>
 <body>
-  <h1>🎬 PolyFilm</h1>
-  <p>Твой кино-учитель</p>
 
-  <div style="background:#020617;padding:20px;border-radius:12px;margin-top:20px;">
-    <p><b>— Hey! Are you ready for the challenge?</b></p>
-    <p>— I think so, but I need to <span onclick="alert('plan = планировать')" style="color:#22c55e;cursor:pointer;">plan</span> carefully.</p>
-    <p>— Don’t worry, just <span onclick="alert('focus = сосредоточиться')" style="color:#22c55e;cursor:pointer;">focus</span> and go.</p>
-    <p>— Okay, I’ll try to <span onclick="alert('escape = сбежать')" style="color:#22c55e;cursor:pointer;">escape</span> the distractions!</p>
-  </div>
+<h1>🎬 PolyFilm</h1>
+<p>Твой кино-учитель</p>
 
-  <button style="margin-top:20px;" onclick="alert('🎧 Здесь скоро будет озвучка сцены')">
-    ▶️ Смотреть сцену
-  </button>
+<div id="scene-container" class="scene"></div>
 
-  <p style="opacity:0.6;margin-top:30px;">🧠 Нажимай на слова, чтобы учить язык</p>
-</body>
+<button id="prev-btn">⬅️ Предыдущая сцена</button>
+<button id="next-btn">➡️ Следующая сцена</button>
+
+<p style="opacity:0.6;margin-top:20px;">🧠 Нажимай на слова, чтобы учить язык</p>
+
+<script>
+// --- сцены продукта ---
+const scenes = [
+  {
+    text: [
+      "— Hey! Are you ready for the challenge?",
+      "— I think so, but I need to <span class='word' data-tr='планировать'>plan</span> carefully.",
+      "— Don’t worry, just <span class='word' data-tr='сосредоточиться'>focus</span> and go.",
+      "— Okay, I’ll try to <span class='word' data-tr='сбежать'>escape</span> the distractions!"
+    ]
+  },
+  {
+    text: [
+      "— Did you complete your task?",
+      "— Yes
