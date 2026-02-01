@@ -3,37 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <title>PolyFilm</title>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
-  body {
-    font-family: Arial;
-    background: #0f172a;
-    color: white;
-    text-align: center;
-    padding: 30px;
-  }
-  .scene {
-    background:#020617;
-    padding:20px;
-    border-radius:12px;
-    margin-top:20px;
-    text-align:left;
-  }
-  span.word {
-    color:#22c55e;
-    cursor:pointer;
-    font-weight:bold;
-  }
-  button {
-    margin-top:20px;
-    padding:10px 20px;
-    font-size:18px;
-    border-radius:10px;
-    border:none;
-    background:#22c55e;
-    color:black;
-    cursor:pointer;
-  }
+  body { font-family: Arial; background: #0f172a; color: white; text-align: center; padding: 30px; }
+  .scene { background:#020617; padding:20px; border-radius:12px; margin-top:20px; text-align:left; }
+  span.word { color:#22c55e; cursor:pointer; font-weight:bold; }
+  button { margin:10px 5px; padding:10px 20px; font-size:18px; border-radius:10px; border:none; background:#22c55e; color:black; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -49,50 +23,40 @@
 <p style="opacity:0.6;margin-top:20px;">🧠 Нажимай на слова, чтобы учить язык</p>
 
 <script>
-// --- сцены продукта ---
+// Сцены
 const scenes = [
-  {
-    text: [
-      "— Hey! Are you ready for the challenge?",
-      "— I think so, but I need to <span class='word' data-tr='планировать'>plan</span> carefully.",
-      "— Don’t worry, just <span class='word' data-tr='сосредоточиться'>focus</span> and go.",
-      "— Okay, I’ll try to <span class='word' data-tr='сбежать'>escape</span> the distractions!"
-    ]
-  },
-  {
-    text: [
-      "— Did you complete your task?",
-      "— Yes, I had to <span class='word' data-tr='разобраться'>figure out</span> the problem first.",
-      "— Good! That’s the way to <span class='word' data-tr='добиться'>achieve</span> results.",
-      "— I will keep practicing to <span class='word' data-tr='улучшить'>improve</span> every day."
-    ]
-  }
+  [
+    "— Hey! Are you ready for the challenge?",
+    "— I think so, but I need to <span class='word' data-tr='планировать'>plan</span> carefully.",
+    "— Don’t worry, just <span class='word' data-tr='сосредоточиться'>focus</span> and go.",
+    "— Okay, I’ll try to <span class='word' data-tr='сбежать'>escape</span> the distractions!"
+  ],
+  [
+    "— Did you complete your task?",
+    "— Yes, I had to <span class='word' data-tr='разобраться'>figure out</span> the problem first.",
+    "— Good! That’s the way to <span class='word' data-tr='добиться'>achieve</span> results.",
+    "— I will keep practicing to <span class='word' data-tr='улучшить'>improve</span> every day."
+  ]
 ];
 
-// --- логика переключения сцен ---
 let currentScene = 0;
 
-function renderScene(index) {
+// Рендер сцены
+function renderScene() {
   const container = document.getElementById("scene-container");
-  container.innerHTML = scenes[index].text.map(line => `<p>${line}</p>`).join('');
-  // добавляем клики на слова
-  document.querySelectorAll('.word').forEach(el=>{
+  container.innerHTML = scenes[currentScene].map(line => `<p>${line}</p>`).join('');
+  document.querySelectorAll('.word').forEach(el => {
     el.onclick = () => alert(`${el.innerText} = ${el.dataset.tr}`);
   });
 }
 
-document.getElementById("next-btn").onclick = () => {
-  if(currentScene < scenes.length - 1) currentScene++;
-  renderScene(currentScene);
-}
-document.getElementById("prev-btn").onclick = () => {
-  if(currentScene > 0) currentScene--;
-  renderScene(currentScene);
-}
+// Кнопки
+document.getElementById("next-btn").onclick = () => { if(currentScene < scenes.length-1) { currentScene++; renderScene(); } };
+document.getElementById("prev-btn").onclick = () => { if(currentScene > 0) { currentScene--; renderScene(); } };
 
-// --- первый рендер ---
-renderScene(currentScene);
-
+// Инициализация
+renderScene();
 </script>
+
 </body>
 </html>
