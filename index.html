@@ -62,4 +62,37 @@ const scenes = [
   {
     text: [
       "— Did you complete your task?",
-      "— Yes
+      "— Yes, I had to <span class='word' data-tr='разобраться'>figure out</span> the problem first.",
+      "— Good! That’s the way to <span class='word' data-tr='добиться'>achieve</span> results.",
+      "— I will keep practicing to <span class='word' data-tr='улучшить'>improve</span> every day."
+    ]
+  }
+];
+
+// --- логика переключения сцен ---
+let currentScene = 0;
+
+function renderScene(index) {
+  const container = document.getElementById("scene-container");
+  container.innerHTML = scenes[index].text.map(line => `<p>${line}</p>`).join('');
+  // добавляем клики на слова
+  document.querySelectorAll('.word').forEach(el=>{
+    el.onclick = () => alert(`${el.innerText} = ${el.dataset.tr}`);
+  });
+}
+
+document.getElementById("next-btn").onclick = () => {
+  if(currentScene < scenes.length - 1) currentScene++;
+  renderScene(currentScene);
+}
+document.getElementById("prev-btn").onclick = () => {
+  if(currentScene > 0) currentScene--;
+  renderScene(currentScene);
+}
+
+// --- первый рендер ---
+renderScene(currentScene);
+
+</script>
+</body>
+</html>
